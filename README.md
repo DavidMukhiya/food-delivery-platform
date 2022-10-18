@@ -1,11 +1,12 @@
 ## Food Delivery Platform (Vendor Mangement)
 * It is a web application. Where the user/owner can Register/Update their restaurants.
-* The owner/user will able to update or add one or more dishes under each restaurant.
+* The owner/user will be able to update or add one or more dishes under each restaurant.
 * It will be a full-stack project.
 * For project management and to maximize my efficiency. I will be using kanban board an agile project management tool.
 *For the Mockup Design, I have used canva.
 
 ## My Mockup Design
+
 * Login Page
 ![Food delivery Platform!](food-delivery-platform-login.png)
 
