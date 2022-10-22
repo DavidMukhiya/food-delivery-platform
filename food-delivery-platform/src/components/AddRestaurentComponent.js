@@ -22,7 +22,7 @@ const AddRestaurentComponent = () => {
             name="restaurantName"
             placeholder="Restaurant Name *"
             type="text"
-            style={{ backgroundColor: "#DDC1A7", width: "25rem", margin: "1.5rem 0rem" }}
+            style={{ backgroundColor: "#DDC1A7", width: "25rem", margin: "1.5rem 0rem" , textAlign:'center'  }}
           />
         </FormGroup>
         <FormGroup>
@@ -39,7 +39,7 @@ const AddRestaurentComponent = () => {
             placeholder="Email Address *"
             type="email"
             className="addRestaurantInputStyle"
-            style={{ backgroundColor: "#DDC1A7", width: "25rem", marginBottom:'1.5rem'  }}
+            style={{ backgroundColor: "#DDC1A7", width: "25rem", marginBottom:'1.5rem', textAlign:'center'   }}
           />
         </FormGroup>
         <FormGroup>
@@ -56,7 +56,7 @@ const AddRestaurentComponent = () => {
             placeholder="Set A Password*"
             type="password"
             className="addRestaurantInputStyle"
-            style={{ backgroundColor: "#DDC1A7", width: "25rem", margin:'1.5rem 0' }}
+            style={{ backgroundColor: "#DDC1A7", width: "25rem", margin:'1.5rem 0', textAlign:'center' }}
           />
         </FormGroup>
         <Button style={{ backgroundColor: "#BD9479", color: "#5B4F47", display: 'block', marginTop:'2.5rem'}} className='mx-auto'>
