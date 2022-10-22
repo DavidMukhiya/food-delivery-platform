@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import "../css/addrestaurantstyle.css";
 
 const YourRestaurantComponent = () => {
   return (
