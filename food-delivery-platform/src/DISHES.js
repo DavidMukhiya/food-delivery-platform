@@ -14,6 +14,7 @@ export const DISHES = [
     category: "evening",
     restaurantId: "001",
     image: dish1,
+    // restaurantName: "Restaurant 1"
   },
   {
     id: 101,

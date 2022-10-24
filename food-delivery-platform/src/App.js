@@ -1,16 +1,16 @@
 import "./App.css";
-// import AddDishComponent from "./components/AddDishComponent";
-// import AddRestaurentComponent from "./components/AddRestaurentComponent";
+import AddDishComponent from "./components/AddDishComponent";
+import AddRestaurentComponent from "./components/AddRestaurentComponent";
 import DishCardComponentList from "./components/DishCardComponentList";
-// import YourRestaurantComponent from "./components/YourRestaurantComponent";
+import YourRestaurantComponent from "./components/YourRestaurantComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
     <div>
-      {/* <AddRestaurentComponent />
+      <AddRestaurentComponent />
       <YourRestaurantComponent />
-      <AddDishComponent /> */}
+      <AddDishComponent />
       <DishCardComponentList />
     </div>
   );

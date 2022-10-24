@@ -7,15 +7,17 @@ const DishCardComponent = ({ dish }) => {
   return (
     <Card
       style={{
-        width: "18rem",
+        width: "26rem",
+        paddingRight: '0px',
+        marginRight: '0px'
       }}
     >
-      <img alt={name} src={image} 
+      <img alt={name} src={image} style={{height:"22rem"}}
     />
-      <CardBody>
-        <CardTitle tag="h5">{name}</CardTitle>
+      <CardBody style={{color:'black', textAlign:'center', backgroundColor:'rgb(221, 193, 167)'}}>
+        <CardTitle tag="h5" >{name}</CardTitle>
         <CardText>{description}</CardText>
-        <Button>{price}</Button>
+        <Button style={{backgroundColor:'#EAE9E4', color:'black'}}>{price}</Button>
       </CardBody>
     </Card>
   );
