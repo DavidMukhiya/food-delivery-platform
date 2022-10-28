@@ -34,7 +34,7 @@ public class RestaurantController {
         return this.restaurantService.updateRestaurant(restaurantID, restaurant);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/restaurants/{restaurantID}")
     public String deleteUserByID(@PathVariable String restaurantID) {
         return this.restaurantService.deleteRestaurant(Integer.parseInt(restaurantID));
     }
