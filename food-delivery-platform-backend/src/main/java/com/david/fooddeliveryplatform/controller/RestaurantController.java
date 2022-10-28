@@ -29,7 +29,7 @@ public class RestaurantController {
         return this.restaurantService.addRestaurant(restaurant);
     }
 
-    @PutMapping("/restaurants/{restaurantsID}")
+    @PutMapping("/restaurants/{restaurantID}")
     public ResponseEntity<Restaurant> updateRestaurant(@PathVariable int restaurantID, @RequestBody Restaurant restaurant){
         return this.restaurantService.updateRestaurant(restaurantID, restaurant);
     }
