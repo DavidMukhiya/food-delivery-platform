@@ -16,7 +16,7 @@ public interface DishService {
     ResponseEntity<Dish> updateDish(int dishID, Dish dish);
 
     String deleteDish(int dishID);
-   List<Dish> getDishesByRestaurant(int restaurantID);
+   ResponseEntity<List<Dish>> getDishesByRestaurant(int restaurantID);
 
 
 }

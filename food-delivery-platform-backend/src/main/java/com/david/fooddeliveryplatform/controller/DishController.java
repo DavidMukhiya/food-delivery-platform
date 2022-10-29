@@ -25,7 +25,7 @@ public class DishController {
     }
 
     @GetMapping("/restaurants/{restaurantID}/dishes")
-    public List<Dish> getDishByRestaurant(@PathVariable int restaurantID){
+    public ResponseEntity<List<Dish>> getDishByRestaurant(@PathVariable int restaurantID){
         return this.dishService.getDishesByRestaurant(restaurantID);
     }
 

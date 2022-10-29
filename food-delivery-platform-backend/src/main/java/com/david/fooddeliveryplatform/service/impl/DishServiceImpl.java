@@ -2,6 +2,7 @@ package com.david.fooddeliveryplatform.service.impl;
 
 import com.david.fooddeliveryplatform.entity.Dish;
 import com.david.fooddeliveryplatform.entity.Restaurant;
+import com.david.fooddeliveryplatform.exception.ResourceNotFoundException;
 import com.david.fooddeliveryplatform.repository.DishRepo;
 import com.david.fooddeliveryplatform.repository.RestaurantRepo;
 import com.david.fooddeliveryplatform.service.DishService;
@@ -26,20 +27,24 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public ResponseEntity<Dish> getDishByID(int dishID) {
-        Dish dish = dishRepo.findById(dishID).orElseThrow(()->new RuntimeException("Dish not exist with id:"+ dishID));
+        Dish dish = dishRepo.findById(dishID)
+                //.orElseThrow(()-> new ResourceNotFoundException("Dish", "id ", dishID));
+                .orElseThrow(()->new RuntimeException("Dish not exist with id:"+ dishID));
         return ResponseEntity.ok(dish);
     }
 
     @Override
-    public List<Dish> getDishesByRestaurant(int restaurantID) {
+    public ResponseEntity<List<Dish>> getDishesByRestaurant(int restaurantID) {
         Restaurant restaurant = this.restaurantRepo.findById(restaurantID)
+                //.orElseThrow(()-> new ResourceNotFoundException("Dish", "Restaurant", restaurantID));
                 .orElseThrow(()->new RuntimeException("Restaurant not exist with id:"+ restaurantID));
         List<Dish> dishes = this.dishRepo.findByRestaurant(restaurant);
-        return dishes;
+        return ResponseEntity.ok(dishes);
     }
 
     @Override
     public Dish addDish(int restaurantID,Dish dish) {
+        //Restaurant restaurant = this.restaurantRepo.findById(restaurantID).orElseThrow(()->new RuntimeException("Restaurant not exist with id:"+ restaurantID));
         Restaurant restaurant = this.restaurantRepo.findById(restaurantID).orElseThrow(()->new RuntimeException("Restaurant not exist with id:"+ restaurantID));
         dish.setRestaurant(restaurant);
         return this.dishRepo.save(dish);
