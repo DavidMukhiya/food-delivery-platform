@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface DishRepo extends JpaRepository<Dish, Integer> {
-//    List<Dish> findByRestaurant(Restaurant restaurant);
+    List<Dish> findByRestaurant(Restaurant restaurant);
 }

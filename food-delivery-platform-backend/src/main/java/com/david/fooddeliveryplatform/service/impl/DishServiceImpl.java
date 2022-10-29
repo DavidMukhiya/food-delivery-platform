@@ -30,6 +30,13 @@ public class DishServiceImpl implements DishService {
         return ResponseEntity.ok(dish);
     }
 
+    @Override
+    public List<Dish> getDishesByRestaurant(int restaurantID) {
+        Restaurant restaurant = this.restaurantRepo.findById(restaurantID)
+                .orElseThrow(()->new RuntimeException("Restaurant not exist with id:"+ restaurantID));
+        List<Dish> dishes = this.dishRepo.findByRestaurant(restaurant);
+        return dishes;
+    }
 
     @Override
     public Dish addDish(int restaurantID,Dish dish) {
@@ -55,12 +62,7 @@ public class DishServiceImpl implements DishService {
     @Override
     public String deleteDish(int dishID) {
         this.dishRepo.deleteById(dishID);
-        return "Movie with ID: "+dishID+ " is deleted Successfully.";
+        return "Dish with ID: "+dishID+ " is deleted Successfully.";
     }
-
-//    @Override
-//    public List<Dish> getAllDishByRestaurant(Restaurant restaurant) {
-//        return null;
-//    }
 
 }

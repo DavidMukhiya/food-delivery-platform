@@ -24,6 +24,11 @@ public class DishController {
         return this.dishService.getDishByID(Integer.parseInt(dishID));
     }
 
+    @GetMapping("/restaurants/{restaurantID}/dishes")
+    public List<Dish> getDishByRestaurant(@PathVariable int restaurantID){
+        return this.dishService.getDishesByRestaurant(restaurantID);
+    }
+
     @PostMapping("/restaurant/{restaurantID}/dishes/")
     public Dish addDish(@PathVariable int restaurantID,@RequestBody Dish dish) {
         return this.dishService.addDish(restaurantID, dish);
