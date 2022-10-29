@@ -1,7 +1,9 @@
 package com.david.fooddeliveryplatform.service.impl;
 
 import com.david.fooddeliveryplatform.entity.Dish;
+import com.david.fooddeliveryplatform.entity.Restaurant;
 import com.david.fooddeliveryplatform.repository.DishRepo;
+import com.david.fooddeliveryplatform.repository.RestaurantRepo;
 import com.david.fooddeliveryplatform.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,9 @@ public class DishServiceImpl implements DishService {
 
     @Autowired
     private DishRepo dishRepo;
+
+    @Autowired
+    private RestaurantRepo restaurantRepo;
     @Override
     public List<Dish> getAllDish() {
         return this.dishRepo.findAll();
@@ -25,8 +30,11 @@ public class DishServiceImpl implements DishService {
         return ResponseEntity.ok(dish);
     }
 
+
     @Override
-    public Dish addDish(Dish dish) {
+    public Dish addDish(int restaurantID,Dish dish) {
+        Restaurant restaurant = this.restaurantRepo.findById(restaurantID).orElseThrow(()->new RuntimeException("Restaurant not exist with id:"+ restaurantID));
+        dish.setRestaurant(restaurant);
         return this.dishRepo.save(dish);
     }
 
@@ -36,10 +44,10 @@ public class DishServiceImpl implements DishService {
         updateDish.setDishId(dish.getDishId());
         updateDish.setDishName(dish.getDishName());
         updateDish.setDishImage(dish.getDishImage());
-        //updateDish.setCategory(dish.setCategory());
+        updateDish.setCategory(dish.getCategory());
         updateDish.setDescription(dish.getDescription());
         updateDish.setPrice(dish.getPrice());
-        updateDish.setRestaurantId(dish.getRestaurantId());
+        updateDish.setRestaurant(dish.getRestaurant());
         dishRepo.save(updateDish);
         return ResponseEntity.ok(updateDish);
     }
@@ -49,4 +57,10 @@ public class DishServiceImpl implements DishService {
         this.dishRepo.deleteById(dishID);
         return "Movie with ID: "+dishID+ " is deleted Successfully.";
     }
+
+//    @Override
+//    public List<Dish> getAllDishByRestaurant(Restaurant restaurant) {
+//        return null;
+//    }
+
 }
