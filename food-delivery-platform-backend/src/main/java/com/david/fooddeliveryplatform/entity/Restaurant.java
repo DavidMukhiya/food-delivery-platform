@@ -21,6 +21,7 @@ public class Restaurant {
     private String restaurantEmail;
     private String password;
 
+
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Dish> dish = new ArrayList<>();
