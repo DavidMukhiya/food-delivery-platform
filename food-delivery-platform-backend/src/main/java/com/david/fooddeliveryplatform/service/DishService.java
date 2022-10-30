@@ -9,7 +9,7 @@ import java.util.List;
 public interface DishService {
     List<Dish> getAllDish();
 
-    ResponseEntity<Dish> getDishByID(int dishID);
+    Dish getDishByID(int dishID);
 
     Dish addDish(int restaurantID, Dish dish);
 

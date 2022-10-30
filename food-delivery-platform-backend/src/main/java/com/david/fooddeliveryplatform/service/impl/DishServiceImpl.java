@@ -26,11 +26,11 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public ResponseEntity<Dish> getDishByID(int dishID) {
+    public Dish getDishByID(int dishID) {
         Dish dish = dishRepo.findById(dishID)
                 //.orElseThrow(()-> new ResourceNotFoundException("Dish", "id ", dishID));
                 .orElseThrow(()->new RuntimeException("Dish not exist with id:"+ dishID));
-        return ResponseEntity.ok(dish);
+        return dish;
     }
 
     @Override
