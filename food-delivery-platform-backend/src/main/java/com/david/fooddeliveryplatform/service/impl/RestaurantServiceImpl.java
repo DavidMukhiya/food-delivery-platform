@@ -21,10 +21,10 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public ResponseEntity<Restaurant> getRestaurantByID(int restaurantID) {
+    public Restaurant getRestaurantByID(int restaurantID) {
         Restaurant restaurant = restaurantRepo.findById(restaurantID).orElseThrow(()->
                 new RuntimeException("Restaurant doesn't exist with id:" + restaurantID));
-        return ResponseEntity.ok(restaurant);
+        return restaurant;
     }
 
     @Override

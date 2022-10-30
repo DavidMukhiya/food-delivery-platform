@@ -8,7 +8,7 @@ import java.util.List;
 public interface RestaurantService {
     List<Restaurant> getAllRestaurant();
 
-    ResponseEntity<Restaurant> getRestaurantByID(int restaurantID);
+    Restaurant getRestaurantByID(int restaurantID);
 
     Restaurant addRestaurant(Restaurant restaurant);
 

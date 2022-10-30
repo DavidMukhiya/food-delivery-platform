@@ -20,6 +20,7 @@ public class Restaurant {
     private String restaurantName;
     private String restaurantEmail;
     private String password;
+    private String safetyLicenseDoc;
 
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

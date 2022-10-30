@@ -1,7 +1,6 @@
 package com.david.fooddeliveryplatform.service;
 
 import com.david.fooddeliveryplatform.entity.Dish;
-import com.david.fooddeliveryplatform.entity.Restaurant;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
