@@ -4,18 +4,19 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
-public class Restaurant {
+public class Restaurant implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int restaurantId;
@@ -34,4 +35,34 @@ public class Restaurant {
     joinColumns = @JoinColumn(name="restaurant", referencedColumnName = "restaurantId"),
     inverseJoinColumns = @JoinColumn(name="role", referencedColumnName = "id"))
     private Set<Role> roles = new HashSet<>();
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> authorities = this.roles.stream().map((role) -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+        return authorities;
+    }
+    @Override
+    public String getUsername() {
+        return this.restaurantEmail;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
