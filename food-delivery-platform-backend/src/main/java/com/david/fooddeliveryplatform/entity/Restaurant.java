@@ -7,7 +7,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -26,4 +28,10 @@ public class Restaurant {
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Dish> dish = new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
+    joinColumns = @JoinColumn(name="restaurant", referencedColumnName = "restaurantId"),
+    inverseJoinColumns = @JoinColumn(name="role", referencedColumnName = "id"))
+    private Set<Role> roles = new HashSet<>();
 }
