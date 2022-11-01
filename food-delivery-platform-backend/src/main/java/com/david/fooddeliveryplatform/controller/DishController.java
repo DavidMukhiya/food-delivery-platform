@@ -69,7 +69,7 @@ public class DishController {
         return ResponseEntity.ok(dish);
     }
 
-    @GetMapping(value = "dish/image/{imageName}", produces = MediaType.IMAGE_JPEG_VALUE)
+    @GetMapping(value = "dish/image/{imageName}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
     public void downloadImage(@PathVariable("imageName") String imageName, HttpServletResponse response) throws IOException {
         InputStream resource = this.fileService.getResource(path, imageName);
         response.setContentType(MediaType.IMAGE_JPEG_VALUE);
