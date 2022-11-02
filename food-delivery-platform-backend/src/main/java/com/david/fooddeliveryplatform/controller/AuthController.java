@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -40,7 +41,16 @@ public class AuthController {
     }
     private void authenticate(String username, String password){
         UsernamePasswordAuthenticationToken authenticationToken= new UsernamePasswordAuthenticationToken(username, password);
-        this.authenticationManager.authenticate(authenticationToken);
+        try{
+            this.authenticationManager.authenticate(authenticationToken);
+        }catch (BadCredentialsException e){
+            System.out.println("Invalid Details");
+            try {
+                throw new Exception("Invalid Username and Password");
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        }
 
     }
 }
