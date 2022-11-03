@@ -1,6 +1,5 @@
 package com.david.fooddeliveryplatform.controller;
 
-import com.david.fooddeliveryplatform.entity.Dish;
 import com.david.fooddeliveryplatform.entity.Restaurant;
 import com.david.fooddeliveryplatform.service.FileService;
 import com.david.fooddeliveryplatform.service.RestaurantService;
@@ -8,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +29,8 @@ public class RestaurantController {
     @Value("${project.safetylicense}")
     private String path;
 
+
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/restaurants")
     public List<Restaurant> getAllRestaurants(){
         return restaurantService.getAllRestaurant();
@@ -49,6 +51,9 @@ public class RestaurantController {
         return this.restaurantService.updateRestaurant(restaurantID, restaurant);
     }
 
+    //ADMIN
+    //DELETE - delete user
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/restaurants/{restaurantID}")
     public String deleteUserByID(@PathVariable String restaurantID) {
         return this.restaurantService.deleteRestaurant(Integer.parseInt(restaurantID));
