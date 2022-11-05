@@ -30,7 +30,7 @@ public class RestaurantController {
     private String path;
 
 
-    @PreAuthorize("hasRole('ADMIN')")
+
     @GetMapping("/restaurants")
     public List<Restaurant> getAllRestaurants(){
         return restaurantService.getAllRestaurant();
@@ -41,6 +41,7 @@ public class RestaurantController {
         return this.restaurantService.getRestaurantByID(Integer.parseInt(restaurantID));
     }
 
+    @RequestMapping(path = "/auth/restaurants", method = RequestMethod.POST)
     @PostMapping("/restaurants")
     public Restaurant addRestaurant(@RequestBody Restaurant restaurant){
         return this.restaurantService.addRestaurant(restaurant);

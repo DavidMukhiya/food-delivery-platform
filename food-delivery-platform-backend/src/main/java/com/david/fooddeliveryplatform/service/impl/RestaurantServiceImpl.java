@@ -1,10 +1,14 @@
 package com.david.fooddeliveryplatform.service.impl;
 
+import com.david.fooddeliveryplatform.config.AppConstants;
 import com.david.fooddeliveryplatform.entity.Restaurant;
+import com.david.fooddeliveryplatform.entity.Role;
 import com.david.fooddeliveryplatform.repository.RestaurantRepo;
+import com.david.fooddeliveryplatform.repository.RoleRepo;
 import com.david.fooddeliveryplatform.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +18,12 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Autowired
     private RestaurantRepo restaurantRepo;
+
+    @Autowired
+    private RoleRepo roleRepo;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<Restaurant> getAllRestaurant() {
@@ -29,7 +39,11 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public Restaurant addRestaurant(Restaurant restaurant) {
-        return this.restaurantRepo.save(restaurant);
+        restaurant.setPassword(this.passwordEncoder.encode(restaurant.getPassword()));
+        Role role = this.roleRepo.findById(AppConstants.NORMAL_USER).get();
+        restaurant.getRoles().add(role);
+        this.restaurantRepo.save(restaurant);
+        return restaurant;
     }
 
     @Override
