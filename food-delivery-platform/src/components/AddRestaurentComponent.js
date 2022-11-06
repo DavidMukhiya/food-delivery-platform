@@ -59,6 +59,17 @@ const AddRestaurentComponent = () => {
             style={{ backgroundColor: "#DDC1A7", width: "25rem", margin:'1.5rem 0', textAlign:'center' }}
           />
         </FormGroup>
+        <FormGroup>
+                <Label for="file" className="visually-hidden">Image</Label>
+                <Input id="file" name="file" type="file"
+                style={{
+                    backgroundColor: "#DDC1A7",
+                    width: "25rem",
+                    margin: "1.5rem 0",
+                    textAlign: "center",
+                    color: "#6C757D",
+                  }} />
+              </FormGroup>
         <Button style={{ backgroundColor: "#BD9479", color: "#5B4F47", display: 'block', marginTop:'2.5rem'}} className='mx-auto'>
           Sign Up
         </Button>
