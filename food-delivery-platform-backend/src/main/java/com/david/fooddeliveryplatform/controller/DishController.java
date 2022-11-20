@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class DishController {
 
     @Autowired

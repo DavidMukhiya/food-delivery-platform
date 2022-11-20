@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -43,12 +44,12 @@ public class RestaurantController {
 
     @RequestMapping(path = "/auth/restaurants", method = RequestMethod.POST)
     @PostMapping("/restaurants")
-    public Restaurant addRestaurant(@RequestBody Restaurant restaurant){
+    public Restaurant addRestaurant(@Valid  @RequestBody Restaurant restaurant){
         return this.restaurantService.addRestaurant(restaurant);
     }
 
     @PutMapping("/restaurants/{restaurantID}")
-    public ResponseEntity<Restaurant> updateRestaurant(@PathVariable int restaurantID, @RequestBody Restaurant restaurant){
+    public ResponseEntity<Restaurant> updateRestaurant(@Valid @PathVariable int restaurantID, @RequestBody Restaurant restaurant){
         return this.restaurantService.updateRestaurant(restaurantID, restaurant);
     }
 
