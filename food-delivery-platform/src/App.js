@@ -6,11 +6,14 @@ import YourRestaurantComponent from "./components/YourRestaurantComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Routes } from "react-router-dom";
 import WelcomePageComponent from "./components/WelcomePageComponent";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <div>
       <WelcomePageComponent />
+      <ToastContainer position="top-center" autoClose="1000"/>
       <Routes>
         <Route path="/" element={<AddRestaurentComponent />}></Route>
         <Route path="signup" element={<AddRestaurentComponent />}></Route>

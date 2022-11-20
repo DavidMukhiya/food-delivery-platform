@@ -2,15 +2,17 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 import "../css/addrestaurantstyle.css";
+import { signUp, uploadDoc } from "../services/user-service";
+import { toast } from "react-toastify";
 
 const AddRestaurentComponent = () => {
   const [data, setData] = useState({
     restaurantName: "",
-    emailAddress: "",
+    restaurantEmail: "",
     password: "",
   });
 
-  const [file, setfile] = useState();
+  const [safetyLicenseDoc, setsafetyLicenseDoc] = useState(null);
 
   const [error, setError] = useState({
     errors: {},
@@ -27,18 +29,40 @@ const AddRestaurentComponent = () => {
   };
 
   const handleFileChange = (event) => {
-    console.log(event.target.files);
-    //setfile(event.taget.files);
+    console.log(event.target.safetyLicenseDoc);
+    setsafetyLicenseDoc(event.target.safetyLicenseDoc);
   };
 
-  const submitForm=(event)=>{
-    event.preventDefault()
-    console.log(data)
-    
+  const submitForm = (event) => {
+    event.preventDefault();
+    // uploadDoc(safetyLicenseDoc, data.restuarantID).then(data=>{
+    //   console.log("Image Uploaded !!")
+    // }).catch(error=>{
+    //   console.log("Error in Uploading Image.")
+    //   console.log(error)
+    // })
+    // console.log(data)
+
     //data validate
 
     //call server api for sending data
-  }
+    signUp(data)
+      .then((resp) => {
+        console.log(resp);
+        console.log("Success log");
+        toast.success("Restaurant is registered Successfully !!");
+        setData({
+          restaurantName: "",
+          restaurantEmail: "",
+          password: "",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        console.Console.log("Error Log");
+        toast.error("Restaurant couldn'get registered. ");
+      });
+  };
 
   return (
     <div className="addRestaurantComponentStyle">
@@ -52,7 +76,7 @@ const AddRestaurentComponent = () => {
       >
         Add Restaurant
       </p>
-      <Form onSubmit={submitForm} >
+      <Form onSubmit={submitForm}>
         {/* Restaurant Name */}
         <FormGroup>
           <Label
@@ -81,20 +105,20 @@ const AddRestaurentComponent = () => {
         {/* email address */}
         <FormGroup>
           <Label
-            for="emailAddress"
+            for="restaurantEmail"
             className="visually-hidden"
             style={{ color: "#5B4F47" }}
           >
             Email Address
           </Label>
           <Input
-            id="emailAddress"
-            name="emailAddress"
+            id="restaurantEmail"
+            name="restaurantEmail"
             placeholder="Email Address *"
             type="email"
             className="addRestaurantInputStyle"
-            onChange={(e) => handleChange(e, "emailAddress")}
-            value={data.emailAddress}
+            onChange={(e) => handleChange(e, "restaurantEmail")}
+            value={data.restaurantEmail}
             style={{
               backgroundColor: "#DDC1A7",
               width: "25rem",
@@ -132,14 +156,14 @@ const AddRestaurentComponent = () => {
 
         {/* file */}
         <FormGroup>
-          <Label for="file" className="visually-hidden">
+          <Label for="safetyLicenseDoc" className="visually-hidden">
             Health Doc
           </Label>
           <Input
-            id="file"
-            name="file"
+            id="safetyLicenseDoc"
+            name="safetyLicenseDoc"
             type="file"
-            onChange={(e) => handleFileChange(e)}
+            onChange={handleFileChange}
             style={{
               backgroundColor: "#DDC1A7",
               width: "25rem",
@@ -161,7 +185,6 @@ const AddRestaurentComponent = () => {
           Sign Up
         </Button>
       </Form>
-      '
     </div>
   );
 };
