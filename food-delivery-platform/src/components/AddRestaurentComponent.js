@@ -59,7 +59,7 @@ const AddRestaurentComponent = () => {
       })
       .catch((error) => {
         console.log(error);
-        console.Console.log("Error Log");
+        console.log("Error Log");
         toast.error("Restaurant couldn'get registered. ");
       });
   };
