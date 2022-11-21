@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 import "../css/addrestaurantstyle.css";
 import { loginUser } from '../services/user-service';
+import { doLogin } from "../auth";
 
 const YourRestaurantComponent = () => {
 
@@ -29,9 +30,15 @@ const YourRestaurantComponent = () => {
       return
     }
     //submit the data to server to generate token
-    loginUser(loginDetail).then((jwtTokenData)=>{
-      console.log("user login: ")
-      console.log(jwtTokenData)
+    loginUser(loginDetail).then((data)=>{
+      console.log(data)
+
+      //save the data to local storage
+      doLogin(data, ()=>{
+        console.log("login detail is saved to local storage")
+        //redirect to restaurant dashboard poage
+      })
+      toast.success("Login Success")
     }).catch(error=>{
       console.log(error)
       if(error.response.status === 400 || error.response.status === 404){
