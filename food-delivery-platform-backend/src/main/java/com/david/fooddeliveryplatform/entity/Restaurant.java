@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,16 +24,19 @@ public class Restaurant implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int restaurantId;
+
     @NotEmpty
     @Size(min = 6, message = "Restaurant name must be of 4 characters")
     private String restaurantName;
-    @Column(unique = true)
+
     @Email(message = "Invalid Email Address")
+    @Column(unique = true)
     private String restaurantEmail;
 
     @NotEmpty
-    @Size(min = 6, max = 10, message = "Invalid Password, password shouldn't be empty and Min size is 6 and Max size is 10")
+    @Size(min = 6, message = "Invalid Password, password shouldn't be empty and Min size is 6")
     private String password;
+
     private String safetyLicenseDoc;
 
 

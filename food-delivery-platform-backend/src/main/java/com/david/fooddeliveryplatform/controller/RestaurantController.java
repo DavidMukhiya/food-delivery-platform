@@ -44,7 +44,7 @@ public class RestaurantController {
 
     @RequestMapping(path = "/auth/restaurants", method = RequestMethod.POST)
     @PostMapping("/restaurants")
-    public Restaurant addRestaurant(@Valid  @RequestBody Restaurant restaurant){
+    public Restaurant addRestaurant(@Valid @RequestBody Restaurant restaurant){
         return this.restaurantService.addRestaurant(restaurant);
     }
 
