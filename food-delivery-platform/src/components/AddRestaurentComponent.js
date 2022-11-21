@@ -1,6 +1,13 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Form, FormGroup, Input, Label, Button } from "reactstrap";
+import {
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Button,
+  FormFeedback,
+} from "reactstrap";
 import "../css/addrestaurantstyle.css";
 import { signUp, uploadDoc } from "../services/user-service";
 import { toast } from "react-toastify";
@@ -33,15 +40,23 @@ const AddRestaurentComponent = () => {
     setsafetyLicenseDoc(event.target.safetyLicenseDoc);
   };
 
+  //submit the form
   const submitForm = (event) => {
     event.preventDefault();
+    // if (error.isError) {
+    //   toast.error("Form data is invalid, correct all details, then submit");
+    //   setError({...error, isError:false})
+    //   return;
+    // }
+
+
     // uploadDoc(safetyLicenseDoc, data.restuarantID).then(data=>{
     //   console.log("Image Uploaded !!")
     // }).catch(error=>{
     //   console.log("Error in Uploading Image.")
     //   console.log(error)
     // })
-    // console.log(data)
+    console.log(data);
 
     //data validate
 
@@ -60,7 +75,12 @@ const AddRestaurentComponent = () => {
       .catch((error) => {
         console.log(error);
         console.log("Error Log");
-        toast.error("Restaurant couldn'get registered. ");
+        //handle error in proper way
+        setError({
+          errors: error,
+          isError: true,
+        });
+        toast.error("Restaurant registration unsuccessful. Form data is invalid, correct all details, then submit.");
       });
   };
 
@@ -99,7 +119,13 @@ const AddRestaurentComponent = () => {
             }}
             onChange={(e) => handleChange(e, "restaurantName")}
             value={data.restaurantName}
+            invalid={
+              error.errors?.response?.data?.restaurantName ? true : false
+            }
           />
+          <FormFeedback  className="feedback" >
+            {error.errors?.response?.data?.restaurantName}
+          </FormFeedback>
         </FormGroup>
 
         {/* email address */}
@@ -119,6 +145,9 @@ const AddRestaurentComponent = () => {
             className="addRestaurantInputStyle"
             onChange={(e) => handleChange(e, "restaurantEmail")}
             value={data.restaurantEmail}
+            invalid={
+              error.errors?.response?.data?.restaurantEmail ? true : false
+            }
             style={{
               backgroundColor: "#DDC1A7",
               width: "25rem",
@@ -126,6 +155,9 @@ const AddRestaurentComponent = () => {
               textAlign: "center",
             }}
           />
+          <FormFeedback className="feedback">
+            {error.errors?.response?.data?.restaurantEmail}
+          </FormFeedback>
         </FormGroup>
 
         {/* passsword */}
@@ -151,7 +183,9 @@ const AddRestaurentComponent = () => {
               textAlign: "center",
             }}
             value={data.password}
+            invalid={error.errors?.response?.data?.password ? true : false}
           />
+          <FormFeedback  className="feedback">{error.errors?.response?.data?.password}</FormFeedback>
         </FormGroup>
 
         {/* file */}

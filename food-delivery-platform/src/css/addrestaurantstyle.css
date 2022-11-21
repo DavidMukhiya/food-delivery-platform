@@ -5,3 +5,7 @@
     align-content: center;
     margin: auto;
 }
+
+.invalid-feedback {
+    margin-top: 0.5rem;
+}
