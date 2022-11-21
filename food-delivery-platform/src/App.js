@@ -13,7 +13,7 @@ function App() {
   return (
     <div>
       <WelcomePageComponent />
-      <ToastContainer position="top-center" autoClose="1000"/>
+      <ToastContainer position="top-center" autoClose="2000"/>
       <Routes>
         <Route path="/" element={<AddRestaurentComponent />}></Route>
         <Route path="signup" element={<AddRestaurentComponent />}></Route>
