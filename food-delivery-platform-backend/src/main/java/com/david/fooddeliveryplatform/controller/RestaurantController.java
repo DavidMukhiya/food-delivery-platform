@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class RestaurantController {
 
